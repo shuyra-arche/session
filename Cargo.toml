@@ -1,0 +1,21 @@
+[workspace]
+resolver = "3"
+members = [
+    "cluster",
+    "units/account/api",
+    "units/account/client",
+    "units/account/declaration",
+    "units/account/server",
+]
+# Unit-owned host tests remain separate workspaces.
+exclude = ["units/account/tests"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
