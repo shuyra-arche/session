@@ -5,59 +5,24 @@ version = 4
 [[package]]
 name = "account-api"
 version = "0.1.0"
+source = "git+https://github.com/shuyra-arche/account.git?rev=7dc701facdbe6368fbc09f7429920ad49dacdfca#7dc701facdbe6368fbc09f7429920ad49dacdfca"
 dependencies = [
  "env",
  "mold",
  "system-api",
- "wire",
-]
-
-[[package]]
-name = "account-client"
-version = "0.1.0"
-dependencies = [
- "account-api",
- "env",
- "ipc",
- "resource",
- "system-api",
- "system-client",
  "wire",
 ]
 
 [[package]]
 name = "account-declaration"
 version = "0.1.0"
+source = "git+https://github.com/shuyra-arche/account.git?rev=7dc701facdbe6368fbc09f7429920ad49dacdfca#7dc701facdbe6368fbc09f7429920ad49dacdfca"
 dependencies = [
  "account-api",
  "env",
  "system-api",
  "unit",
 ]
-
-[[package]]
-name = "account-server"
-version = "0.1.0"
-dependencies = [
- "account-api",
- "env",
- "execution",
- "ipc",
- "mold",
- "resource",
- "system-api",
- "system-client",
- "system-support",
- "terminal-api",
- "unit",
- "wire",
-]
-
-[[package]]
-name = "allocator-api2"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c880a97d28a3681c0267bd29cff89621202715b065127cd445fa0f0fe0aa2880"
 
 [[package]]
 name = "bitflags"
@@ -81,52 +46,6 @@ name = "erra"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bc36b9bc9f9fd011eb63c44cdba19d47c4e77f4759cddb0c448b1d23d27abc1e"
-
-[[package]]
-name = "execution"
-version = "0.1.0"
-source = "git+https://github.com/shuyra-arche/execution.git?rev=1b333a28bc4c34beaea3f7986a9bb6e8ab2db414#1b333a28bc4c34beaea3f7986a9bb6e8ab2db414"
-dependencies = [
- "env",
- "spinning_top",
- "talc",
-]
-
-[[package]]
-name = "fdt"
-version = "0.1.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "784a4df722dc6267a04af36895398f59d21d07dce47232adf31ec0ff2fa45e67"
-
-[[package]]
-name = "hub-api"
-version = "0.1.0"
-source = "git+https://github.com/shuyra-arche/hub.git?rev=cccef3f325198c8390007ae88b064bae0f21f93e#cccef3f325198c8390007ae88b064bae0f21f93e"
-dependencies = [
- "env",
- "mold",
- "system-api",
- "wire",
-]
-
-[[package]]
-name = "ipc"
-version = "0.1.0"
-source = "git+https://github.com/shuyra-arche/ipc.git?rev=29ad97dc08d9dfc4ea6578b1b77874261229b3b5#29ad97dc08d9dfc4ea6578b1b77874261229b3b5"
-dependencies = [
- "env",
- "resource",
- "wire",
-]
-
-[[package]]
-name = "lock_api"
-version = "0.4.14"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "224399e74b87b5f3557511d98dff8b14089b3dadafcab6bb93eab67d3aace965"
-dependencies = [
- "scopeguard",
-]
 
 [[package]]
 name = "mold"
@@ -157,35 +76,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "resource"
-version = "0.1.0"
-source = "git+https://github.com/shuyra-arche/resource.git?rev=dbc96834f50f094b5c386e54a0a2ae5560dcd7f8#dbc96834f50f094b5c386e54a0a2ae5560dcd7f8"
-dependencies = [
- "env",
- "erra",
-]
-
-[[package]]
-name = "scopeguard"
-version = "1.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "94143f37725109f92c262ed2cf5e59bce7498c01bcc1502d7b9afe439a4e9f49"
-
-[[package]]
 name = "session-cluster"
 version = "0.1.0"
 dependencies = [
  "account-declaration",
+ "terminal-declaration",
  "unit",
-]
-
-[[package]]
-name = "spinning_top"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d96d2d1d716fb500937168cc09353ffdc7a012be8475ac7308e1bdf0e3923300"
-dependencies = [
- "lock_api",
 ]
 
 [[package]]
@@ -210,48 +106,12 @@ dependencies = [
 ]
 
 [[package]]
-name = "system-client"
+name = "terminal-declaration"
 version = "0.1.0"
-source = "git+https://github.com/shuyra-arche/system.git?rev=5a792ff2d39901a970925b1a6d63206adf6c16d8#5a792ff2d39901a970925b1a6d63206adf6c16d8"
+source = "git+https://github.com/shuyra-arche/terminal.git?rev=f07a0954f65472e9a16e878e52c5f1d34146bc64#f07a0954f65472e9a16e878e52c5f1d34146bc64"
 dependencies = [
- "env",
- "execution",
- "ipc",
- "resource",
  "system-api",
- "wire",
-]
-
-[[package]]
-name = "system-support"
-version = "0.1.0"
-source = "git+https://github.com/shuyra-arche/system.git?rev=5a792ff2d39901a970925b1a6d63206adf6c16d8#5a792ff2d39901a970925b1a6d63206adf6c16d8"
-dependencies = [
- "env",
- "execution",
- "fdt",
- "hub-api",
- "resource",
-]
-
-[[package]]
-name = "talc"
-version = "5.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "53f8ad14fa1c1b8635114abf9721076fe1e869572a5f26a52690f407292c80dc"
-dependencies = [
- "allocator-api2",
- "lock_api",
-]
-
-[[package]]
-name = "terminal-api"
-version = "0.1.0"
-source = "git+https://github.com/shuyra-arche/terminal.git?rev=c447c0761835339a39efdf2ddd8101ebf80db15a#c447c0761835339a39efdf2ddd8101ebf80db15a"
-dependencies = [
- "env",
- "mold",
- "wire",
+ "unit",
 ]
 
 [[package]]

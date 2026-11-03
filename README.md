@@ -1,32 +1,34 @@
 # Session Cluster
 
-This repository introduces the Session Cluster with its first migrated Unit,
-**Account**. It is not a claim that the full Session roster has moved.
+This repository is the **Session Cluster aggregate** only. It owns the explicit
+member/build interface and joint acceptance contract; it does not own Unit Core
+or copy Unit implementation.
 
-## Current members
+## Fixed Unit submodules
 
-- `units/account`: Account API, client, server and pure unit declaration, plus
-  Unit-owned host tests.
-- `cluster`: `session-cluster`, a `no_std` package exposing the explicit
-  `UNITS` and `IMAGE_BUILDS` slices for the current Account slice. It contains no
-  global registry type and no server/client runtime dependency.
+- `units/account` at public Account
+  `7dc701facdbe6368fbc09f7429920ad49dacdfca`.
+- `units/terminal` at accepted public Terminal
+  `f07a0954f65472e9a16e878e52c5f1d34146bc64`.
 
-## Pending and external
+`cluster/session-cluster` is a pure `no_std` package. It reexports the two Unit
+declarations and exposes explicit `UNITS` and `IMAGE_BUILDS` slices with
+repository-relative manifests `units/account/server/Cargo.toml` and
+`units/terminal/server/Cargo.toml`. It has no server/client/runtime dependency,
+no global registry and no new Cluster implementation type.
 
-- **Terminal** remains pending relocation. Its accepted public API identity and
-  `c447c0761835339a39efdf2ddd8101ebf80db15a` dependency stay fixed.
-- **Login** remains Source-owned; no login runtime is copied here.
-- The actual combined Session composition list, selected Deployment and
-  integration acceptance remain owned by Source/Vanllia. No Cluster Rust type
-  duplicates the `unit` schema.
+Accepted external identities stay fixed: Terminal API
+`c447c0761835339a39efdf2ddd8101ebf80db15a`; System API
+`9e5d63ca536a176583cf1b0054b4ecf7ddd88257` and System client/support
+`5a792ff2d39901a970925b1a6d63206adf6c16d8`; Kernel
+`3aa0a155f825fbf377fc8d04009472ca67cbbf8c`; System runtime
+`9001af65f97501dfa490c9397c61d593c871136d`.
 
-## Source and builds
+**Login** remains Source-owned and pending. The actual combined Source
+composition, selected Deployment and AccountRig stay Source/Vanllia-owned. This
+is not a complete Session or migration claim.
 
-Account was extracted from Source
-`293c15fc97a9d9a4295810d10fe804e4cdec63c4`. The Account declaration `BUILD`
-names `units/account/server/Cargo.toml`, package `account-server`, binary
-`account`. The root workspace builds `cluster` and the Account Unit; host tests
-under `units/account/tests` remain separate workspaces. Root owns Cargo locks,
-native checks, publication and Source intake.
-
-See `PROVENANCE.md` for the checkpoint map and license status.
+Root owns Cargo locks, provenance, nested gitlink validation, native/RV runs,
+publication and the recursive clean-checkout proof. Joint acceptance remains
+pending; see `ACCEPTANCE.md`. Original Source base remains
+`293c15fc97a9d9a4295810d10fe804e4cdec63c4`.

@@ -1,14 +1,8 @@
 [workspace]
 resolver = "3"
-members = [
-    "cluster",
-    "units/account/api",
-    "units/account/client",
-    "units/account/declaration",
-    "units/account/server",
-]
-# Unit-owned host tests remain separate workspaces.
-exclude = ["units/account/tests"]
+members = ["cluster"]
+# Unit submodules are independent Git workspaces, not aggregate members.
+exclude = ["units/account", "units/terminal"]
 
 [workspace.package]
 version = "0.1.0"

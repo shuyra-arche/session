@@ -11,5 +11,6 @@ bench = false
 doctest = false
 
 [dependencies]
-account-declaration = { path = "../units/account/declaration" }
+account-declaration = { git = "https://github.com/shuyra-arche/account.git", rev = "7dc701facdbe6368fbc09f7429920ad49dacdfca" }
+terminal-declaration = { git = "https://github.com/shuyra-arche/terminal.git", rev = "f07a0954f65472e9a16e878e52c5f1d34146bc64" }
 unit = { git = "https://github.com/shuyra-arche/unit.git", rev = "90396f0fda376e0693fb1b9553aa21864d241057" }
