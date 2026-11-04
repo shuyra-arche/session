@@ -88,3 +88,51 @@ Session/Driver/Vanllia migration is claimed at this publication stage. The
 source root had no project LICENSE; no license is invented. Original Unit file
 headers and authorship remain in their own public histories and provenance
 files.
+
+## Terminal `f07` → `d120` intake
+
+This slice is based exactly on Session PR #2 head
+`3534b3a868f49424fd34213960a8201f8a914c1a`, branch
+`codex/session-login-registration`; that branch stays unmodified. The new work
+branch is `codex/session-terminal-uart-intake`. The current Terminal input is
+now the `units/terminal` clone `https://github.com/shuyra-arche/session-terminal.git`
+at `d120e3ddf4b4a6c00685f32310897622d3440dd5`, replacing the earlier
+`f07a0954…` row above. Account `7dc701fa…`, Login `session-login.git@ce8e9007…`
+and `unit.git@90396f0f…` remain the exact same sources. The canonical
+`terminal.git` Cargo URL spelling is retained with only its revision changed;
+the submodule clone remote is the distinct URL
+`https://github.com/shuyra-arche/session-terminal.git`, and no UART source
+enters this aggregate graph. Clone remote and Cargo dependency are different
+URLs, and every source identity here is taken from the actual URL plus full
+revision, not from clone-remote naming.
+
+The reproducible comparison is fixed base `3534b3a8…` with Terminal
+`terminal.git@f07a0954…` against this work branch with Terminal
+`terminal.git@d120e3dd…`. Between those coordinates
+`units/terminal/declaration/src/lib.rs` and
+`units/terminal/declaration/Cargo.toml` are byte-equal, so `UNIT`/`BUILD`,
+`E_TERMINAL`, the Operator/UART dependencies and the registration assertions
+are unchanged. Each Unit worktree is the exact byte tree of its own selected
+pinned provider; the Units are not all equal to former revisions, and
+Terminal's provider `server/Cargo.toml` and nested lock carry the intentional
+selected UART delta. That delta is Terminal's own production UART input: both
+`uart-api` and `uart-client` in `units/terminal/server/Cargo.toml` move from
+`uart.git@b690431496b0beaeb5fb7cafb42e60b4c8b38c9d` to
+`driver-uart.git@298bc8809f297f46bc7592aebc96540b7b492efc`, with the matching
+two source strings in Terminal's nested top lock. That is a real Cargo source
+identity change, not a version bump: equal UART `api`/`client` source bytes
+across the two commits support retained source-level behavior, and no claim is
+made that compiled object or item bytes are identical. Terminal API stays
+`terminal.git@c447c0761835339a39efdf2ddd8101ebf80db15a`.
+
+Two graphs are recorded separately. The aggregate `cluster/` graph sees only
+one changed resolution coordinate: `terminal-declaration` from
+`terminal.git?rev=f07a0954…` to `terminal.git?rev=d120e3dd…`. The nested
+Terminal runtime library graph reconciles exactly two edges into the single
+`driver-uart.git@298bc880…` `uart-api`/`uart-client` identities. No package,
+dependency list, feature, `system-api` or `unit` change is expected in the
+aggregate lock, and Terminal's existing `tests/uart-identity` consumer checker
+is reused rather than duplicated. All 12 runtime gates remain PENDING; no
+QEMU, product integration, Login startup or foreground-lending result is
+claimed. Future Session/Vanllia work must adopt the resulting public Session
+head; this slice changes only this standalone Session aggregate.
