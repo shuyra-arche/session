@@ -1,10 +1,12 @@
 #![no_std]
-//! Explicit Session Cluster members for the current Account and fixed Terminal slices.
+//! Explicit Session Cluster members for the current Account, fixed Terminal and
+//! independently published Login slices.
 
 pub use account_declaration as account;
+pub use login_declaration as login;
 pub use terminal_declaration as terminal;
 
-pub static UNITS: &[&unit::UnitFile] = &[&account::UNIT, &terminal::UNIT];
+pub static UNITS: &[&unit::UnitFile] = &[&account::UNIT, &terminal::UNIT, &login::PROGRAM];
 
 const ACCOUNT_BUILD: unit::ImageBuild = unit::ImageBuild {
     image: account::BUILD.image,
@@ -28,4 +30,15 @@ const TERMINAL_BUILD: unit::ImageBuild = unit::ImageBuild {
     default_features: terminal::BUILD.default_features,
 };
 
-pub static IMAGE_BUILDS: &[unit::ImageBuild] = &[ACCOUNT_BUILD, TERMINAL_BUILD];
+const LOGIN_BUILD: unit::ImageBuild = unit::ImageBuild {
+    image: login::BUILD.image,
+    manifest: "units/login/server/Cargo.toml",
+    package: login::BUILD.package,
+    bin: login::BUILD.bin,
+    features: login::BUILD.features,
+    target: login::BUILD.target,
+    profile: login::BUILD.profile,
+    default_features: login::BUILD.default_features,
+};
+
+pub static IMAGE_BUILDS: &[unit::ImageBuild] = &[ACCOUNT_BUILD, TERMINAL_BUILD, LOGIN_BUILD];

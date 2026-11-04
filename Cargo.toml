@@ -2,7 +2,7 @@
 resolver = "3"
 members = ["cluster"]
 # Unit submodules are independent Git workspaces, not aggregate members.
-exclude = ["units/account", "units/terminal"]
+exclude = ["units/account", "units/terminal", "units/login"]
 
 [workspace.package]
 version = "0.1.0"
