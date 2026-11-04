@@ -1,6 +1,6 @@
 [submodule "units/account"]
 	path = units/account
-	url = https://github.com/shuyra-arche/account.git
+	url = https://github.com/shuyra-arche/session-account.git
 [submodule "units/terminal"]
 	path = units/terminal
-	url = https://github.com/shuyra-arche/terminal.git
+	url = https://github.com/shuyra-arche/session-terminal.git
