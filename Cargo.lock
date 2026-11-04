@@ -48,6 +48,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bc36b9bc9f9fd011eb63c44cdba19d47c4e77f4759cddb0c448b1d23d27abc1e"
 
 [[package]]
+name = "login-declaration"
+version = "0.1.0"
+source = "git+https://github.com/shuyra-arche/session-login.git?rev=ce8e9007817d7494e05c057e23a7ba907a5d5ba8#ce8e9007817d7494e05c057e23a7ba907a5d5ba8"
+dependencies = [
+ "unit",
+]
+
+[[package]]
 name = "mold"
 version = "0.1.0"
 source = "git+https://github.com/shuyra-arche/mold.git?rev=f52501f4c91b686eded8b4bcd743b4e96084b7f9#f52501f4c91b686eded8b4bcd743b4e96084b7f9"
@@ -80,6 +88,7 @@ name = "session-cluster"
 version = "0.1.0"
 dependencies = [
  "account-declaration",
+ "login-declaration",
  "terminal-declaration",
  "unit",
 ]
