@@ -9,7 +9,7 @@ or copy Unit implementation.
 - `units/account` at public Account
   `7dc701facdbe6368fbc09f7429920ad49dacdfca`.
 - `units/terminal` at accepted public Terminal
-  `f07a0954f65472e9a16e878e52c5f1d34146bc64`.
+  `d120e3ddf4b4a6c00685f32310897622d3440dd5`.
 - `units/login` at independently published Login
   `ce8e9007817d7494e05c057e23a7ba907a5d5ba8`.
 
@@ -25,9 +25,21 @@ implementation type.
 The `units/account` and `units/terminal` submodule remotes are named
 `session-account` and `session-terminal`, while the canonical Cargo dependency
 URLs remain `account.git` and `terminal.git`. The renamed clone remotes are
-distinct from those intentionally retained canonical Cargo URLs with their full
-revisions, which this slice does not change; renaming a clone remote is not
-treated as a Cargo source identity replacement.
+distinct from those canonical Cargo URL spellings; the URL spellings are
+retained and each selected revision is listed above, so renaming a clone remote
+is not treated as a Cargo source identity replacement.
+
+The Terminal pin `d120e3dd…` is declared here as
+`terminal-declaration` from the canonical `terminal.git` URL with its full
+revision. Its `declaration/` files are byte-equal to `f07a0954…`, so the
+Cluster registration is unchanged. Inside Terminal, the two production UART
+dependencies now resolve to the actual nested UART source driver-uart.git at
+`298bc8809f297f46bc7592aebc96540b7b492efc`, replacing
+`uart.git@b690431496b0beaeb5fb7cafb42e60b4c8b38c9d`. That UART move is
+Terminal's own intake, recorded in `units/terminal`; the canonical
+`terminal.git` Cargo source and the distinct `session-terminal.git` clone
+remote are both retained, and the UART source is not introduced into this
+aggregate graph.
 
 Accepted external identities stay fixed: Terminal API
 `c447c0761835339a39efdf2ddd8101ebf80db15a`; System API

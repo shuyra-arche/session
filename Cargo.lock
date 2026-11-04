@@ -117,7 +117,7 @@ dependencies = [
 [[package]]
 name = "terminal-declaration"
 version = "0.1.0"
-source = "git+https://github.com/shuyra-arche/terminal.git?rev=f07a0954f65472e9a16e878e52c5f1d34146bc64#f07a0954f65472e9a16e878e52c5f1d34146bc64"
+source = "git+https://github.com/shuyra-arche/terminal.git?rev=d120e3ddf4b4a6c00685f32310897622d3440dd5#d120e3ddf4b4a6c00685f32310897622d3440dd5"
 dependencies = [
  "system-api",
  "unit",
