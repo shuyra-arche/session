@@ -1,6 +1,6 @@
 //! Host integration coverage for the aggregate registration itself: ordered
 //! membership of the provider declarations and the prefixed image coordinates.
-//! These are not the runtime acceptance gates recorded in `ACCEPTANCE.md`.
+//! These are not the runtime checks described in the repository README.
 
 use session_cluster::{IMAGE_BUILDS, UNITS, account, login, terminal};
 use unit::{Dependency, Ending, Ready};

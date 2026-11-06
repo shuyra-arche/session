@@ -1,62 +1,34 @@
-# Session Cluster
+# Session
 
-This repository is the **Session Cluster aggregate** only. It owns the explicit
-member/build interface and joint acceptance contract; it does not own Unit Core
-or copy Unit implementation.
+Session groups the Account, Terminal and Login Units for Shuyra Vanllia. It owns
+their pinned Git submodules and the `session-cluster` build declarations.
+Unit implementations remain in their own repositories; product packaging and
+runtime acceptance belong to [Vanllia](https://github.com/shuyra-arche/vanllia).
 
-## Fixed Unit submodules
+## Layout
 
-- `units/account` at public Account
-  `7dc701facdbe6368fbc09f7429920ad49dacdfca`.
-- `units/terminal` at accepted public Terminal
-  `d120e3ddf4b4a6c00685f32310897622d3440dd5`.
-- `units/login` at independently published Login
-  `ce8e9007817d7494e05c057e23a7ba907a5d5ba8`.
+- `units/account`, `units/terminal`, `units/login`: provider submodules.
+- `cluster/src/lib.rs`: ordered `UNITS` and `IMAGE_BUILDS` compatibility exports.
+- `cluster/tests/registration.rs`: provider identity, order and build-path checks.
 
-`cluster/session-cluster` is a pure `no_std` package. It reexports the three
-provider declarations and exposes explicit `UNITS` and `IMAGE_BUILDS` slices in
-the order account, terminal, login, with repository-relative manifests
-`units/account/server/Cargo.toml`, `units/terminal/server/Cargo.toml` and
-`units/login/server/Cargo.toml`. Every non-manifest build field comes from the
-matching provider `BUILD`; the Cluster only prefixes the manifest. It has no
-server/client/runtime dependency, no global registry and no new Cluster
-implementation type.
+Gitlinks select provider trees. `cluster/Cargo.toml` and `Cargo.lock` select
+Cargo dependencies. Account and Terminal still use the historical `account.git`
+and `terminal.git` Cargo URLs; `.gitmodules` uses their renamed repository URLs.
+Changing a URL can change Cargo identity even when source bytes match.
 
-The `units/account` and `units/terminal` submodule remotes are named
-`session-account` and `session-terminal`, while the canonical Cargo dependency
-URLs remain `account.git` and `terminal.git`. The renamed clone remotes are
-distinct from those canonical Cargo URL spellings; the URL spellings are
-retained and each selected revision is listed above, so renaming a clone remote
-is not treated as a Cargo source identity replacement.
+## Prepare and verify
 
-The Terminal pin `d120e3dd…` is declared here as
-`terminal-declaration` from the canonical `terminal.git` URL with its full
-revision. Its `declaration/` files are byte-equal to `f07a0954…`, so the
-Cluster registration is unchanged. Inside Terminal, the two production UART
-dependencies now resolve to the actual nested UART source driver-uart.git at
-`298bc8809f297f46bc7592aebc96540b7b492efc`, replacing
-`uart.git@b690431496b0beaeb5fb7cafb42e60b4c8b38c9d`. That UART move is
-Terminal's own intake, recorded in `units/terminal`; the canonical
-`terminal.git` Cargo source and the distinct `session-terminal.git` clone
-remote are both retained, and the UART source is not introduced into this
-aggregate graph.
+Install Rust through rustup; `rust-toolchain.toml` selects `nightly-2026-09-04`.
+Run from the root, with network access for the first dependency fetch:
 
-Accepted external identities stay fixed: Terminal API
-`c447c0761835339a39efdf2ddd8101ebf80db15a`; System API
-`9e5d63ca536a176583cf1b0054b4ecf7ddd88257` and System client/support
-`5a792ff2d39901a970925b1a6d63206adf6c16d8`; Kernel
-`3aa0a155f825fbf377fc8d04009472ca67cbbf8c`; System runtime
-`9001af65f97501dfa490c9397c61d593c871136d`.
+```sh
+git submodule update --init --recursive
+cargo test -p session-cluster --test registration --target x86_64-unknown-linux-gnu --locked
+cargo check -p session-cluster --target riscv64gc-unknown-none-elf --locked
+```
 
-Login is now an independently published provider registered in this aggregate:
-it keeps its own declaration, body, host tests and provenance in
-`units/login`, and this Cluster selects it. Registration is not composition.
-Source/Vanllia composition, selected Deployment, AccountRig, real startup and
-real terminal/Account acceptance remain pending; no runtime result is claimed.
-This is not a complete Session or migration claim.
+Host registration checks do not run the Units. Validate actual Login startup,
+Account create/inspect/cancel handover and terminal foreground lending with the
+selected Vanllia deployment. Retain the original exit and reclamation criteria.
 
-Root owns Cargo locks, provenance, nested gitlink validation, native/RV runs,
-publication and the recursive clean-checkout proof. Joint acceptance remains
-pending with all 12 runtime gates still PENDING; see `ACCEPTANCE.md`. Original
-Source base remains
-`293c15fc97a9d9a4295810d10fe804e4cdec63c4`.
+Follow the [Shuyra maintenance standard](https://github.com/shuyra-arche/vanllia/blob/main/CONTRIBUTING.md).
